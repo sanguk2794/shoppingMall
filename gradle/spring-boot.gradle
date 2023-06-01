@@ -1,0 +1,46 @@
+/**
+ * Spring Boot plugin
+ *
+ * @author Sanguk
+ */
+
+// Apply spring boot
+plugins.apply("org.springframework.boot")
+
+// Required dependencies
+dependencies {
+    // for spring boot
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+}
+
+def makeManifest(project, manifest) {
+    manifest.attributes["provider"] = "gradle"
+    manifest.attributes["Created-By"] = "Lee Sanguk"
+    manifest.attributes["Implementation-Title"] = "${rootProject.name.toUpperCase().replaceAll('-ECP', '')} (${project.name})"
+    manifest.attributes["Implementation-Version"] = project.version
+}
+
+// make classes jar
+project.bootJar {
+    makeManifest(project, manifest)
+}
+
+// make war package
+plugins.withType(WarPlugin).configureEach {
+    project.bootWar {
+        makeManifest(project, manifest)
+    }
+}
+
+/**
+ *  spring boot default value
+ */
+project.springBoot {
+    buildInfo()
+}
+
+project.bootRun {
+    // It have to version up spring boot
+    jvmArgs = ['-Dfile.encoding=UTF-8']
+}

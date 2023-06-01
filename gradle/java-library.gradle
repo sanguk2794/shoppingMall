@@ -1,0 +1,16 @@
+/**
+ * Java Library plugin
+ *
+ * @author Sanguk
+ */
+
+// Apply to Java Library
+plugins.apply(JavaLibraryPlugin)
+
+// make classes jar
+project.jar {
+    manifest.attributes["provider"] = "gradle"
+    manifest.attributes["Created-By"] = "Lee Sanguk"
+    manifest.attributes["Implementation-Title"] = "${rootProject.name.toUpperCase()} (${project.name})"
+    manifest.attributes["Implementation-Version"] = project.version
+}

@@ -1,0 +1,79 @@
+/**
+ * @author Sanguk
+ */
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.13-SNAPSHOT' apply false
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE' apply false
+}
+
+// Gradle's variables
+ext {
+	gradleDir = rootProject.file('gradle/')
+
+	def apps = new File(rootDir, "applications").list()
+
+	allProjects = subprojects
+	javaProjects = subprojects.findAll { new File(it.projectDir, 'src/main/java').directory }
+
+	applications = javaProjects.findAll { apps.contains(it.name) }
+	libraries = javaProjects.findAll { !apps.contains(it.name) }
+	apis = libraries.findAll { it.name.endsWith('-api') }
+}
+
+// Configuration to apply to all subprojects
+configure(ext.get('allProjects')) {
+	plugins.apply(BasePlugin)
+
+	description = "${rootProject.description} (${group}:${name}:${version})"
+
+	// Set the maven repository
+	repositories {
+		jcenter()
+		mavenCentral()
+		mavenLocal()
+	}
+}
+
+// Configuration to apply to the JAVA Projects
+configure(ext.get('javaProjects')) {
+	// Adds Java compilation along with testing and bundling capabilities
+	plugins.apply(JavaPlugin)
+	// Apply to the Dependency Management
+	plugins.apply("io.spring.dependency-management")
+
+	tasks.withType(AbstractCompile).each {
+		it.options.encoding = 'UTF-8'
+		it.sourceCompatibility = JavaVersion.VERSION_11
+		it.targetCompatibility = JavaVersion.VERSION_11
+	}
+
+	// Apply Lombok Annotation Processor
+	// apply from: "${gradleDir}/lombok.gradle"
+
+	// Temporary skip tests. Because, This Project Tests does not work.
+	// test {
+	//     onlyIf { false }
+	// }
+}
+
+// Configuration to apply to the Java Library Projects
+configure(ext.get('libraries')) {
+	// apply from: "${gradleDir}/java-library.gradle"
+}
+
+
+// Configuration to apply to the Spring Boot Projects
+configure(ext.get('applications')) {
+	plugins.apply(WarPlugin)
+	// apply from: "${gradleDir}/spring-boot.gradle"
+}
+
+// Configuration to apply to the ECP API Projects
+configure(ext.get('apis')) {
+	project.sourceSets.main.java.srcDir 'src/gen/java'
+
+	// Apply to QueryDSL
+	// apply from: "${gradleDir}/querydsl.gradle"
+}
