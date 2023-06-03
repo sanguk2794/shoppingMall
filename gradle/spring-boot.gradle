@@ -9,15 +9,17 @@ plugins.apply("org.springframework.boot")
 
 // Required dependencies
 dependencies {
-    // for spring boot
+    // web
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    // test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-def makeManifest(project, manifest) {
+static def makeManifest(project, manifest) {
     manifest.attributes["provider"] = "gradle"
     manifest.attributes["Created-By"] = "Lee Sanguk"
-    manifest.attributes["Implementation-Title"] = "${rootProject.name.toUpperCase().replaceAll('-ECP', '')} (${project.name})"
+    manifest.attributes["Implementation-Title"] = project.name
     manifest.attributes["Implementation-Version"] = project.version
 }
 
@@ -43,4 +45,8 @@ project.springBoot {
 project.bootRun {
     // It have to version up spring boot
     jvmArgs = ['-Dfile.encoding=UTF-8']
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
 }

@@ -1,15 +1,17 @@
+/*
 
-package net.toyproject.mall.back;
+package net.toyproject.mall.front;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
-public class BackApplication {
+public class FrontApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BackApplication.class, args);
+        SpringApplication.run(FrontApplication.class, args);
     }
 
 }
+*/

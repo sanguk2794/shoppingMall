@@ -7,10 +7,43 @@
 // Apply to Java Library
 plugins.apply(JavaLibraryPlugin)
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+// Apply to Spring dependency management
+plugins.apply("io.spring.dependency-management")
+dependencies {
+    // hibernate
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.hibernate:hibernate-entitymanager'
+
+    // h2
+    implementation 'com.h2database:h2'
+}
+
+javadoc {
+    source = project.sourceSets.main.allJava
+    title = project.description
+    failOnError = false
+    options.locale = "en"
+    options.charSet = "UTF-8"
+    options.encoding = "UTF-8"
+    options.use = true
+    options.author = true
+    options.version = true
+    options.addStringOption('Xdoclint:none', '-quiet')
+
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+
 // make classes jar
-project.jar {
+jar {
     manifest.attributes["provider"] = "gradle"
     manifest.attributes["Created-By"] = "Lee Sanguk"
-    manifest.attributes["Implementation-Title"] = "${rootProject.name.toUpperCase()} (${project.name})"
+    manifest.attributes["Implementation-Title"] = project.name
     manifest.attributes["Implementation-Version"] = project.version
 }

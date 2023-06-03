@@ -7,8 +7,7 @@
 def querydslVersion = project.dependencyManagement.importedProperties['querydsl.version']
 
 dependencies {
-    api "com.querydsl:querydsl-jpa"
-
+    implementation "com.querydsl:querydsl-jpa"
     annotationProcessor "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
     annotationProcessor "javax.persistence:javax.persistence-api"
 

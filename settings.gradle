@@ -19,5 +19,5 @@ include 'services:member-api'
 
 // applications
 include 'applications:api-server'
-include 'applications:back'
-include 'applications:front'
+include 'applications:backoffice-server'
+include 'applications:frontoffice-server'
