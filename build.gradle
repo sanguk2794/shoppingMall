@@ -20,10 +20,6 @@ ext {
 	javaProjects = subprojects.findAll { new File(it.projectDir, 'src/main/java').directory }
 	applications = javaProjects.findAll { apps.contains(it.name) }
 	libraries = javaProjects.findAll { !apps.contains(it.name) }
-
-	for (project in libraries) {
-		println(project.name)
-	}
 	apis = libraries.findAll { it.name.endsWith('-api') }
 }
 
@@ -82,6 +78,7 @@ configure(ext.get('apis')) {
 	project.sourceSets.main.java.srcDir 'src/gen/java'
 
 	apply from: "${gradleDir}/api.gradle"
+
 
 	// Apply to QueryDSL
 	// apply from: "${gradleDir}/querydsl.gradle"
