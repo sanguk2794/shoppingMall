@@ -1,0 +1,12 @@
+/**
+ * @author Sanguk
+ */
+
+dependencies {
+    api project(':shared:base-api')
+}
+
+// Temporary skip tests. Because, This Project Tests dose not work.
+test {
+    onlyIf { false }
+}

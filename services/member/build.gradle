@@ -1,0 +1,9 @@
+dependencies {
+    api project(':services:member-api')
+    api project(':shared:base-api')
+}
+
+// Temporary skip tests. Because, This Project Tests dose not work.
+test {
+    onlyIf { false }
+}

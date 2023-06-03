@@ -1,4 +1,6 @@
 dependencies {
+    api project(':shared:common')
+
     // hibernate
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.hibernate:hibernate-entitymanager'
