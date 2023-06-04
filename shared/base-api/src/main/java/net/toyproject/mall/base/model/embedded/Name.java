@@ -2,16 +2,13 @@
  * @author sanguk on 2023/06/04
  */
 
-package net.toyproject.mall.member.model.embedded;
+package net.toyproject.mall.base.model.embedded;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 
-@Embeddable
-@Data
-@NoArgsConstructor
 public class Name {
 
     private String firstName;

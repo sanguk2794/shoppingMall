@@ -18,6 +18,7 @@ public class MemberUtils {
 
     public static Member registerToMember(RegisterMemberDTO memberDTO) {
         Member member = new Member();
+        member.setEmailAddress(memberDTO.getEmailAddress());
         member.setAddress(memberDTO.getAddress());
         member.setPassword(memberDTO.getPassword());
         member.setNickName(memberDTO.getNickName());
