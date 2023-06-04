@@ -3,6 +3,33 @@ spring:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
 
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:tcp://localhost/~/test
+    username: sa
+    password:
+
+  ## JPA Setting Info
   jpa:
     hibernate:
-      ddl-auto: none
+      # option type: create, create-drop, update, validate, none
+      ddl-auto: create
+
+    properties:
+      hibernate:
+        diarect: org.hibernate.dialect.H2Dialect
+        show_sql: true
+        format_sql: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
