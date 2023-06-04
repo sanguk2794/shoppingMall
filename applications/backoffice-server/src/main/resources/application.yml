@@ -1,0 +1,28 @@
+server:
+  port: 31010
+  servlet:
+    session:
+      # 30일
+      timeout: 2592000
+
+spring:
+  output:
+    ansi:
+      enabled: always
+
+  thymeleaf:
+    prefix: classpath:/templates/r/
+    cache: false
+
+  resources:
+    # staticクラスパス指定
+    static-locations: classpath:/static/r/
+
+  session:
+    # セッションストアタイプ設定(none/redis)
+    store-type: none
+
+restapi:
+  type: server
+  base-url: http://localhost:8080
+  log-level: FULL
