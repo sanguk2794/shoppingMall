@@ -56,6 +56,33 @@ configure(ext.get('javaProjects')) {
 	plugins.apply("org.springframework.boot")
 	plugins.apply("io.spring.dependency-management")
 
+	dependencyManagement {
+		// Version management
+		dependencies {
+			// Swagger
+			dependency 'io.springfox:springfox-swagger2:2.9.2'
+			dependency 'io.springfox:springfox-swagger-ui:2.9.2'
+
+			// IO library
+			dependency 'commons-io:commons-io:2.11.0'
+
+			// Feign
+			dependency 'io.github.openfeign:feign-okhttp:9.7.0'
+			dependency 'io.github.openfeign:feign-jackson:9.7.0'
+			dependency 'io.github.openfeign:feign-mock:9.7.0'
+
+			// for Javascript
+			dependency 'org.webjars:webjars-locator:0.40'
+			dependency 'org.webjars:jquery:3.5.1'
+			dependency 'org.webjars:jquery-cookie:1.4.1-1'
+			dependency 'org.webjars:bootstrap:4.5.3'
+			dependency 'org.webjars:vue:2.6.11'
+
+			// JSON Web Token support for the JVM
+			dependency 'io.jsonwebtoken:jjwt:0.9.1'
+		}
+	}
+
 	// Apply Lombok Annotation Processor
 	apply from: "${gradleDir}/lombok.gradle"
 }
@@ -71,6 +98,9 @@ configure(ext.get('applications')) {
 // Configuration to apply to the Java Library Projects
 configure(ext.get('libraries')) {
 	apply from: "${gradleDir}/java-library.gradle"
+
+	// Apply to QueryDSL
+	apply from: "${gradleDir}/querydsl.gradle"
 }
 
 // Configuration to apply to the API Projects
@@ -79,7 +109,4 @@ configure(ext.get('apis')) {
 
 	apply from: "${gradleDir}/api.gradle"
 
-
-	// Apply to QueryDSL
-	// apply from: "${gradleDir}/querydsl.gradle"
 }

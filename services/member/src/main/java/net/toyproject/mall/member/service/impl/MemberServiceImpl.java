@@ -4,18 +4,30 @@
 
 package net.toyproject.mall.member.service.impl;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import net.toyproject.mall.common.code.YN;
 import net.toyproject.mall.member.model.Member;
+import net.toyproject.mall.member.model.QMember;
 import net.toyproject.mall.member.repository.MemberRepository;
 import net.toyproject.mall.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class MemberServiceImpl implements MemberService {
 
     @Autowired
     private MemberRepository repository;
+
+    @Autowired
+    EntityManager entityManager;
+
+    @Autowired
+    JPAQueryFactory factory;
 
     @Override
     public Member createMember(Member member) {
@@ -28,13 +40,23 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public Member findMemberByEmailAddress(String emailAddress) {
+        return repository.findByEmailAddress(emailAddress);
+    }
+
+    @Override
     public Member updateMember(Member member) {
         return repository.save(member);
     }
 
     @Override
-    public Member lockMember(Long memberSn, YN lockYn) {
-        return null;
+    public long lockMember(Long memberSn, YN lockYn) {
+        QMember qMember = QMember.member;
+
+        return factory.update(qMember)
+                .set(qMember.lockYN, lockYn)
+                .where(qMember.memberSn.eq(memberSn))
+                .execute();
     }
 
     @Override
@@ -50,5 +72,25 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public boolean isLockMember(Long memberSn) {
         return false;
+    }
+
+    @Override
+    public long increasePasswordVerifyFailureCnt(Long memberSn, Integer accountLockLoginFailCount) {
+        QMember qMember = QMember.member;
+        factory.update(qMember)
+                .set(qMember.passwordFailureCount, qMember.passwordFailureCount.add(1))
+                .where(qMember.memberSn.eq(memberSn))
+                .execute();
+
+        Integer lockCount = factory.select(qMember.passwordFailureCount)
+                .from(qMember)
+                .where(qMember.memberSn.eq(memberSn))
+                .fetchFirst();
+
+        if (lockCount >= accountLockLoginFailCount) {
+            lockMember(memberSn, YN.Y);
+        }
+
+        return lockCount;
     }
 }

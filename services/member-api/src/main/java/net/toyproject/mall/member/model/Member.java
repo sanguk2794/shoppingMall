@@ -11,8 +11,8 @@ import net.toyproject.mall.common.code.MemberPlatform;
 import net.toyproject.mall.common.code.MemberStatus;
 import net.toyproject.mall.common.code.YN;
 import net.toyproject.mall.common.model.BaseEntity;
-import net.toyproject.mall.member.model.embedded.Address;
-import net.toyproject.mall.member.model.embedded.Name;
+import net.toyproject.mall.common.model.embedded.Address;
+import net.toyproject.mall.common.model.embedded.Name;
 
 import javax.persistence.*;
 

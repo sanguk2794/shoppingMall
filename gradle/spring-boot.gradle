@@ -11,9 +11,10 @@ plugins.apply("org.springframework.boot")
 dependencies {
     // web
     implementation 'org.springframework.boot:spring-boot-starter-web'
-
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // jwt
+    implementation 'io.jsonwebtoken:jjwt'
 }
 
 static def makeManifest(project, manifest) {
