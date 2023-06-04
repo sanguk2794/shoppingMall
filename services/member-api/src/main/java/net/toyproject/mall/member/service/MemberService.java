@@ -9,9 +9,11 @@ public interface MemberService {
 
     Member findMember(Long memberSn);
 
+    Member findMemberByEmailAddress(String emailAddress);
+
     Member updateMember(Member member);
 
-    Member lockMember(Long memberSn, YN lockYn);
+    long lockMember(Long memberSn, YN lockYn);
 
     Member resetPassword(Long memberSn, String newPassword);
 
@@ -19,4 +21,5 @@ public interface MemberService {
 
     boolean isLockMember(Long memberSn);
 
+    long increasePasswordVerifyFailureCnt(Long memberSn, Integer passwordFailureCount);
 }
