@@ -10,6 +10,7 @@ import feign.jackson.JacksonEncoder;
 import feign.okhttp.OkHttpClient;
 import net.toyproject.mall.restapi.client.ApiClientTarget;
 import net.toyproject.mall.restapi.client.member.MemberApi;
+import net.toyproject.mall.restapi.client.member.LoginApi;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,4 +51,8 @@ public class RestApiConfig {
         return createApi(MemberApi.class);
     }
 
+    @Bean
+    public LoginApi loginApi() {
+        return createApi(LoginApi.class);
+    }
 }

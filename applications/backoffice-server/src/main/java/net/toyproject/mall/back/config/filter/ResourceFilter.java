@@ -34,6 +34,7 @@ public class ResourceFilter implements Filter {
             chain.doFilter(request, response);
         }
     }
+
     @Override
     public void destroy() {
     }

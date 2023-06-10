@@ -21,27 +21,20 @@ public class LoginUser extends User {
 
     public String accessToken;
 
-    public String refreshToken;
-
     public Date accessTokenExpDt;
 
-    public Date refreshTokenExpDt;
 
-    public LoginUser(String username, String password, Long memberSn, String accessToken, String refreshToken, Date accessTokenExpDt, Date refreshTokenExpDt) {
+    public LoginUser(String username, String password, Long memberSn, String accessToken, Date accessTokenExpDt) {
         super(username, password, true, true, true, true, new ArrayList<>());
         this.memberSn = memberSn;
         this.accessToken = accessToken;
-        this.refreshToken = refreshToken;
         this.accessTokenExpDt = accessTokenExpDt;
-        this.refreshTokenExpDt = refreshTokenExpDt;
     }
 
-    public LoginUser(String username, String password, Long memberSn, String accessToken, String refreshToken, Date accessTokenExpDt, Date refreshTokenExpDt, List<GrantedAuthority> authorities) {
+    public LoginUser(String username, String password, Long memberSn, String accessToken, Date accessTokenExpDt, List<GrantedAuthority> authorities) {
         super(username, password, true, true, true, true, authorities);
         this.memberSn = memberSn;
         this.accessToken = accessToken;
-        this.refreshToken = refreshToken;
         this.accessTokenExpDt = accessTokenExpDt;
-        this.refreshTokenExpDt = refreshTokenExpDt;
     }
 }

@@ -30,22 +30,6 @@ public class ConstUtils {
 
     public static final String LOGOUT_URL = "/logout/";
 
-    public static final String SESSION_DOUBLE_CLICK_CHECK = "SESSION_DOUBLE_CLICK_CHECK";
-
-    public static final String INPUT_ERROR = "INPUT_ERROR";
-
-    public static final String INPUT_ERROR_MESSAGE = "Error occurred";
-
-    public static final String TOKEN_SUCCESS = "ST001";
-
-    public static final String TOKEN_WRONG = "ST002";
-
-    public static final String TOKEN_WRONG_MESSAGE = "Invalid ID or Password";
-
-    public static final String TOKEN_LOOK = "ST003";
-
-    public static final String TOKEN_LOOK_MESSAGE = "Account Lock";
-
     public static final String USER_DUMMY_ID = "DEFAULT-ID";
 
     public static final String USER_DUMMY_PW = "DEFAULT-PW";
