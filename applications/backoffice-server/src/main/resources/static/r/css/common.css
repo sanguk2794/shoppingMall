@@ -1,0 +1,6 @@
+.error-text {
+    font-family: "MS Pゴシック", Arial, Nunito, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: .8rem;
+    color: red;
+    display: none;
+}
