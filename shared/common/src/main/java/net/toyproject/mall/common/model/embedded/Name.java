@@ -14,7 +14,5 @@ public class Name {
 
     private String firstName;
     private String lastName;
-    private String firstNameKana;
-    private String lastNameKana;
 
 }

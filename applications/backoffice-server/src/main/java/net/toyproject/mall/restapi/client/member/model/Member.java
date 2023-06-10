@@ -31,4 +31,5 @@ public class Member implements Serializable {
     private LocalDateTime createdDt;
     private String updatedBy;
     private LocalDateTime updatedDt;
+
 }

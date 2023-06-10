@@ -34,9 +34,6 @@ public class Member extends BaseEntity {
     @Column(nullable = false, length = 200)
     private String password;
 
-    @Column(nullable = false, length = 20)
-    private String nickName;
-
     @Embedded
     private Name name;
 

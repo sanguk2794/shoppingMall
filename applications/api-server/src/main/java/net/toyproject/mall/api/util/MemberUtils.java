@@ -21,7 +21,6 @@ public class MemberUtils {
         member.setEmailAddress(memberDTO.getEmailAddress());
         member.setAddress(memberDTO.getAddress());
         member.setPassword(memberDTO.getPassword());
-        member.setNickName(memberDTO.getNickName());
         member.setName(memberDTO.getName());
         member.setAddress(memberDTO.getAddress());
         member.setMemberStatus(MemberStatus.Normal);
@@ -35,7 +34,6 @@ public class MemberUtils {
     public static Member updateToMember(UpdateMemberDTO memberDTO, Member member) {
         member.setAddress(memberDTO.getAddress());
         member.setPassword(memberDTO.getPassword());
-        member.setNickName(memberDTO.getNickName());
         member.setName(memberDTO.getName());
         member.setAddress(memberDTO.getAddress());
         member.setLockYN(YN.N);

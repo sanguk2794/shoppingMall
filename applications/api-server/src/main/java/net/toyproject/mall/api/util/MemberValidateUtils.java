@@ -5,7 +5,7 @@
 package net.toyproject.mall.api.util;
 
 import net.toyproject.mall.api.exception.BadRequestException;
-import net.toyproject.mall.api.member.dto.PasswordCredentialDTO;
+import net.toyproject.mall.api.member.dto.LoginParam;
 import net.toyproject.mall.api.member.dto.RegisterMemberDTO;
 import net.toyproject.mall.api.member.dto.UpdateMemberDTO;
 import org.springframework.util.StringUtils;
@@ -35,16 +35,16 @@ public class MemberValidateUtils {
         }
     }
 
-    public static void loginMemberValidate(PasswordCredentialDTO passwordCredentialDTO) {
-        if (!StringUtils.hasLength(passwordCredentialDTO.getEmailAddress())) {
+    public static void loginMemberValidate(LoginParam loginParam) {
+        if (!StringUtils.hasLength(loginParam.getEmailAddress())) {
             throw new BadRequestException("emailAddress must not null");
         }
 
-        if (!StringUtils.hasLength(passwordCredentialDTO.getPassword())) {
+        if (!StringUtils.hasLength(loginParam.getPassword())) {
             throw new BadRequestException("password must not null");
         }
 
-        if (passwordCredentialDTO.getMemberPlatform() == null) {
+        if (loginParam.getMemberPlatform() == null) {
             throw new BadRequestException("platform must not null");
         }
     }
