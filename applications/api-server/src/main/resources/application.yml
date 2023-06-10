@@ -40,3 +40,5 @@ security:
     token:
       secret-key: key
       expire-length: 3600000
+springdoc:
+  version: 'v1'

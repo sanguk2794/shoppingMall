@@ -59,9 +59,8 @@ configure(ext.get('javaProjects')) {
 	dependencyManagement {
 		// Version management
 		dependencies {
-			// Swagger
-			dependency 'io.springfox:springfox-swagger2:2.9.2'
-			dependency 'io.springfox:springfox-swagger-ui:2.9.2'
+			// Springdoc
+			dependency 'org.springdoc:springdoc-openapi-ui:1.7.0'
 
 			// IO library
 			dependency 'commons-io:commons-io:2.11.0'
