@@ -12,10 +12,12 @@ import net.toyproject.mall.api.member.dto.LoginParam;
 import net.toyproject.mall.api.member.dto.RefreshTokenParam;
 import net.toyproject.mall.api.member.dto.TokenDTO;
 import net.toyproject.mall.api.util.MemberValidateUtils;
+import net.toyproject.mall.common.code.LoginProcessStatusCode;
 import net.toyproject.mall.member.model.Member;
 import net.toyproject.mall.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,6 +38,9 @@ public class LoginRestApi {
     @Autowired
     JwtTokenProvider jwtTokenProvider;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Operation(summary = "Get Login Token")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Get Login Token"),
@@ -50,47 +55,40 @@ public class LoginRestApi {
 
         final Member member = memberService.findMemberByEmailAddress(loginParam.getEmailAddress());
         if (Objects.isNull(member)) {
-            tokenDTO.setResponseCode("ST002");
+            tokenDTO.setResponseCode(LoginProcessStatusCode.Empty);
             return ResponseEntity.ok(tokenDTO);
         }
 
         if (loginParam.getMemberPlatform() != member.getMemberPlatform()) {
-            tokenDTO.setResponseCode("ST002");
+            tokenDTO.setResponseCode(LoginProcessStatusCode.InvalidPlatform);
             return ResponseEntity.ok(tokenDTO);
         }
 
         String dbPassword = member.getPassword();
-        if (invalidPassword(loginParam, dbPassword)) {
+        if (!bCryptPasswordEncoder.matches(loginParam.getPassword(), dbPassword)) {
             memberService.increasePasswordVerifyFailureCnt(member.getMemberSn(), LOCK_PASSWORD_FAILURE_COUNT);
-            tokenDTO.setResponseCode("ST002");
+            tokenDTO.setResponseCode(LoginProcessStatusCode.Invalid);
             return ResponseEntity.ok(tokenDTO);
         }
 
         if (memberService.isLockMember(member.getMemberSn())) {
-            tokenDTO.setResponseCode("ST003");
+            tokenDTO.setResponseCode(LoginProcessStatusCode.Locked);
             return ResponseEntity.ok(tokenDTO);
         }
 
-        return ResponseEntity.ok(setTokenDTO(tokenDTO, member));
+        return ResponseEntity.ok(
+                getLoginSuccessTokenDTO(tokenDTO, member));
     }
 
-    public TokenDTO setTokenDTO(TokenDTO tokenDTO, Member member) {
-        tokenDTO.setResponseCode("ST001");
+    public TokenDTO getLoginSuccessTokenDTO(TokenDTO tokenDTO, Member member) {
+        tokenDTO.setResponseCode(LoginProcessStatusCode.Success);
         tokenDTO.setMemberSn(member.getMemberSn());
 
-        final String accessToken = jwtTokenProvider.createToken(JwtTokenProvider.TokenType.Access, member.getEmailAddress());
+        final String accessToken = jwtTokenProvider.createToken(member.getEmailAddress());
         tokenDTO.setAccessToken(accessToken);
-        tokenDTO.setAccessTokenExpDt(jwtTokenProvider.getExpiration(JwtTokenProvider.TokenType.Access, accessToken));
-
-        final String refreshToken = jwtTokenProvider.createToken(JwtTokenProvider.TokenType.Refresh, member.getEmailAddress());
-        tokenDTO.setRefreshToken(refreshToken);
-        tokenDTO.setRefreshTokenExpDt(jwtTokenProvider.getExpiration(JwtTokenProvider.TokenType.Refresh, refreshToken));
+        tokenDTO.setAccessTokenExpDt(jwtTokenProvider.getExpiration(accessToken));
 
         return tokenDTO;
-    }
-
-    private static boolean invalidPassword(LoginParam loginParam, String dbPassword) {
-        return !loginParam.getPassword().equalsIgnoreCase(dbPassword);
     }
 
     @Operation(summary = "Refresh Login Token")
@@ -102,14 +100,13 @@ public class LoginRestApi {
     public ResponseEntity<?> refreshToken(@RequestBody @Validated RefreshTokenParam refreshTokenParam) {
         final TokenDTO tokenDTO = new TokenDTO();
 
-        if (jwtTokenProvider.validateToken(JwtTokenProvider.TokenType.Refresh, refreshTokenParam.getRefreshToken())) {
-            tokenDTO.setResponseCode("ST002");
+        if (jwtTokenProvider.validateToken(refreshTokenParam.getRefreshToken())) {
+            tokenDTO.setResponseCode(LoginProcessStatusCode.Invalid);
             return ResponseEntity.ok(tokenDTO);
         }
 
         return ResponseEntity.ok(
-                setTokenDTO(tokenDTO, memberService.findMember(
-                        jwtTokenProvider.getMemberSn(
-                                JwtTokenProvider.TokenType.Refresh, refreshTokenParam.getRefreshToken()))));
+                getLoginSuccessTokenDTO(tokenDTO, memberService.findMember(
+                        jwtTokenProvider.getMemberSn(refreshTokenParam.getRefreshToken()))));
     }
 }

@@ -34,11 +34,11 @@ logging:
           descriptor:
             sql: trace
 
-
 security:
   jwt:
     token:
-      secret-key: key
+      secret-key: secret-key-1013
       expire-length: 3600000
+
 springdoc:
   version: 'v1'

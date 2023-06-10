@@ -8,7 +8,7 @@ import lombok.Data;
 import net.toyproject.mall.common.code.MemberPlatform;
 
 @Data
-public class PasswordCredentialDTO {
+public class LoginParam {
 
     private String emailAddress;
     private String password;

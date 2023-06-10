@@ -6,10 +6,17 @@ package net.toyproject.mall.api.member.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import net.toyproject.mall.common.code.LoginProcessStatusCode;
+
+import java.util.Date;
 
 @Data
-@AllArgsConstructor
 public class TokenDTO {
+
+    private LoginProcessStatusCode responseCode;
+    private Long memberSn;
     private String accessToken;
-    private String tokenType;
+    private Date accessTokenExpDt;
+    private String transferMemberAgreeToken;
+
 }

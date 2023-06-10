@@ -60,4 +60,20 @@ public class JwtTokenProvider {
 
         return Boolean.TRUE;
     }
+
+    public Date getExpiration(String token) {
+        return Jwts.parser()
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token)
+                .getBody()
+                .getExpiration();
+    }
+
+    public Long getMemberSn(String token) {
+        return Long.parseLong(Jwts.parser()
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token)
+                .getBody()
+                .get("memberSn").toString());
+    }
 }
