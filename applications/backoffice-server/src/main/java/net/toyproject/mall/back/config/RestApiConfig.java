@@ -30,7 +30,8 @@ public class RestApiConfig {
         ApiClientTarget<T> target = new ApiClientTarget<T>(apiClass, apiBaseUrl);
         OkHttpClient client = new OkHttpClient();
 
-        return Feign.builder().encoder(new JacksonEncoder(objectMapper()))
+        return Feign.builder()
+                .encoder(new JacksonEncoder(objectMapper()))
                 .decoder(new JacksonDecoder(objectMapper()))
                 .logger(new Logger.ErrorLogger()).logLevel(apiLogLevel)
                 .client(client).retryer(Retryer.NEVER_RETRY)

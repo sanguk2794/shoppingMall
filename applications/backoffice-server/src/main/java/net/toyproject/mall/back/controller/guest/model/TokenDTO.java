@@ -1,15 +1,19 @@
-/**
- * @author sanguk on 2023/06/04
- */
-
 package net.toyproject.mall.back.controller.guest.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
+import java.util.Date;
+
 @Data
-@AllArgsConstructor
-public class TokenDTO {
+public class TokenDTO implements Serializable {
+
+    private String responseCode;
+    private Long memberSn;
     private String accessToken;
-    private String tokenType;
+    private Date accessTokenExpDt;
+    private String refreshToken;
+    private Date refreshTokenExpDt;
+    private String transferMemberAgreeToken;
+
 }

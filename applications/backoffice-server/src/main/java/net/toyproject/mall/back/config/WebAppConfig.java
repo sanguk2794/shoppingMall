@@ -5,6 +5,7 @@
 package net.toyproject.mall.back.config;
 
 import net.toyproject.mall.back.config.interceptor.CheckInterceptor;
+import net.toyproject.mall.back.util.ConstUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -26,19 +27,19 @@ public class WebAppConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/js/**")
+        registry.addResourceHandler(ConstUtils.RESOURCE_PATH_JS)
                 .addResourceLocations("classpath:/static/r/js/");
 
-        registry.addResourceHandler("/css/**")
+        registry.addResourceHandler(ConstUtils.RESOURCE_PATH_CSS)
                 .addResourceLocations("classpath:/static/r/css/");
 
-        registry.addResourceHandler("/img/**")
+        registry.addResourceHandler(ConstUtils.RESOURCE_PATH_IMG)
                 .addResourceLocations("classpath:/static/r/img/");
 
-        registry.addResourceHandler("/scss/**")
+        registry.addResourceHandler(ConstUtils.RESOURCE_PATH_SCSS)
                 .addResourceLocations("classpath:/static/r/scss/");
 
-        registry.addResourceHandler("/vendor/**")
+        registry.addResourceHandler(ConstUtils.RESOURCE_PATH_VENDOR)
                 .addResourceLocations("classpath:/static/r/vendor/");
     }
 }

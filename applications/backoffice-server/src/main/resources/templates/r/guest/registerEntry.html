@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="en">
+
+<th:block th:replace="common/header :: base_header()"/>
+
+<body class="bg-gradient-primary">
+
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                        </div>
+                        <form class="user" id="registerEntryForm" th:action="@{/}" method="post">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control form-control-user"
+                                           id="firstName"
+                                           name="firstName"
+                                           placeholder="First Name">
+                                    <p class="error-text" id="firstName-error"></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control form-control-user"
+                                           id="lastName"
+                                           name="lastName"
+                                           placeholder="Last Name">
+                                    <p class="error-text" id="lastName-error"></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control form-control-user"
+                                       id="emailAddress"
+                                       name="emailAddress"
+                                       placeholder="Email Address">
+                                <p class="error-text" id="emailAddress-error" style="color: red; display: none;"></p>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="password" class="form-control form-control-user"
+                                           id="password"
+                                           name="password"
+                                           placeholder="Password">
+                                    <p class="error-text" id="password-error"></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control form-control-user"
+                                           id="repeatPassword"
+                                           name="repeatPassword"
+                                           placeholder="Repeat Password">
+                                    <p class="error-text" id="repeatPassword-error"></p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control form-control-user"
+                                           id="zipCode1"
+                                           name="zipCode1"
+                                           placeholder="zipCode">
+                                    <p class="error-text" id="zipCode1-error"></p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control form-control-user"
+                                           id="zipCode2"
+                                           name="zipCode2"
+                                           placeholder="zipCode">
+                                    <p class="error-text" id="zipCode2-error"></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-user"
+                                       id="address1"
+                                       name="address1"
+                                       placeholder="address1">
+                                <p class="error-text" id="address1-error"></p>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-user"
+                                       id="address2"
+                                       name="address2"
+                                       placeholder="address2">
+                                <p class="error-text" id="address2-error"></p>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-user"
+                                       id="address3"
+                                       name="address3"
+                                       placeholder="address3">
+                                <p class="error-text" id="address3-error"></p>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-user"
+                                       id="address4"
+                                       name="address4"
+                                       placeholder="address4">
+                                <p class="error-text" id="address4-error"></p>
+                            </div>
+                            <a id="registerEntryFormSubmitButton" th:href="@{${registerEntryFormSubmitUrl}}" class="btn btn-primary btn-user btn-block">
+                                Register Account
+                            </a>
+                            <hr>
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <!-- TODO forgot password logic -->
+                            <a class="small" href="forgot-password.html">Forgot Password?</a>
+                        </div>
+                        <div class="text-center">
+                            <a class="small" th:href="@{/register/}">Already have an account? Login!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="common/footer :: base_footer()"/>
+<script th:src="@{/js/guest/register.js}"></script>
+
+</body>
+
+</html>
