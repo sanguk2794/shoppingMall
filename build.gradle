@@ -82,6 +82,8 @@ configure(ext.get('javaProjects')) {
 		}
 	}
 
+	apply from: "${gradleDir}/java.gradle"
+
 	// Apply Lombok Annotation Processor
 	apply from: "${gradleDir}/lombok.gradle"
 }

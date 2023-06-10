@@ -15,9 +15,11 @@ java {
 // Apply to Spring dependency management
 plugins.apply("io.spring.dependency-management")
 dependencies {
+    // QueryDSL
     api "com.querydsl:querydsl-jpa"
     implementation "com.querydsl:querydsl-core"
     implementation "com.querydsl:querydsl-apt"
+
     // hibernate
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.hibernate:hibernate-entitymanager'
