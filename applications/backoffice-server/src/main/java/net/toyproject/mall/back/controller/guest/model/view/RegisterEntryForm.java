@@ -5,13 +5,13 @@
 package net.toyproject.mall.back.controller.guest.model.view;
 
 import lombok.Data;
-import org.apache.commons.lang3.StringUtils;
+import net.toyproject.mall.back.controller.guest.model.view.Validator.MemberFormValidator;
+import net.toyproject.mall.back.controller.guest.model.view.common.CommonEntryForm;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
 
 import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Data
-public class RegisterEntryForm implements Serializable {
+public class RegisterEntryForm implements CommonEntryForm, Serializable {
 
     @NotEmpty(message = "住所を入力してください。")
     @Email(message = "メールアドレスを確認してください。")
@@ -55,7 +55,7 @@ public class RegisterEntryForm implements Serializable {
     private String address4;
 
     @Component
-    public static class RegisterEntryFormValidator implements Validator {
+    public static class RegisterEntryFormValidator extends MemberFormValidator {
 
         @Override
         public boolean supports(@NotNull Class<?> clazz) {
@@ -64,14 +64,9 @@ public class RegisterEntryForm implements Serializable {
 
         @Override
         public void validate(@NotNull Object target, @NotNull Errors errors) {
-            RegisterEntryForm registerEntryForm = (RegisterEntryForm) target;
+            final RegisterEntryForm registerEntryForm = (RegisterEntryForm) target;
             checkPassword(errors, registerEntryForm.getPassword(), registerEntryForm.getRepeatPassword());
         }
 
-        public void checkPassword(Errors errors, String password, String password2) {
-            if (!StringUtils.equals(password, password2)) {
-                errors.rejectValue("repeatPassword", "", "入力したパスワードが間違っています。");
-            }
-        }
     }
 }

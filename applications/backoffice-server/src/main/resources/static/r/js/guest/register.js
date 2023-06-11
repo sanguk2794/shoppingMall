@@ -8,7 +8,7 @@ const screenId = "register_screen_lock";
         let form = $(this).parents('form');
         let url = $(this).attr('href');
 
-        registerEntrySubmit(form, url);
+        registerEntryFormSubmit(form, url);
     });
 
     $('.form-control').on('keydown keyup keypress change', function() {
@@ -16,7 +16,7 @@ const screenId = "register_screen_lock";
     });
 })();
 
-function registerEntrySubmit(form, url) {
+function registerEntryFormSubmit(form, url) {
     let registerEntryForm = $("#registerEntryForm").serialize();
     $.ajax({
         url: url,
@@ -38,21 +38,5 @@ function registerEntrySubmit(form, url) {
 
             unlockScreen(screenId);
         }
-    });
-}
-
-function clearErrorMessage() {
-    $('error-text').text("");
-    $('error-text').hide();
-}
-
-function setErrorMessage(data) {
-    $.each($.parseJSON(data.responseText), function (key, value) {
-        let code = value.code;
-        let message = value.message;
-
-        $('#' + code + '-error').text(message);
-        $('#' + code + '-error').show();
-        $('#' + code).addClass("-error");
     });
 }

@@ -9,9 +9,6 @@
     }
 });
 
-/*
- * 画面操作を無効にする
- */
 function lockScreen(id) {
     let domObj = document.createElement('div');
     domObj.id = id;
@@ -27,11 +24,24 @@ function lockScreen(id) {
     domObjParent.appendChild(domObj);
 }
 
-/*
-    画面操作無効を解除する
- */
 function unlockScreen(id) {
     let domObj = document.getElementById(id);
     let domObjParent = domObj.parentNode;
     domObjParent.removeChild(domObj);
+}
+
+function clearErrorMessage() {
+    $('error-text').text("");
+    $('error-text').hide();
+}
+
+function setErrorMessage(data) {
+    $.each($.parseJSON(data.responseText), function (key, value) {
+        let code = value.code;
+        let message = value.message;
+
+        $('#' + code + '-error').text(message);
+        $('#' + code + '-error').show();
+        $('#' + code).addClass("-error");
+    });
 }

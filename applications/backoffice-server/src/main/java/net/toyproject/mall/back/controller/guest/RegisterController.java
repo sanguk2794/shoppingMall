@@ -19,7 +19,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,7 +53,7 @@ public class RegisterController extends BaseController {
                                HttpServletRequest req) {
 
         final HttpSession session = SessionUtils.getSession(req);
-        session.removeAttribute(FORM_NAME);
+        clearRegisterSessions(session);
 
         if (loginUser != null) {
             return UrlBasedViewResolver.REDIRECT_URL_PREFIX + ConstUtils.DEFAULT_REDIRECT_URL;
@@ -86,7 +85,7 @@ public class RegisterController extends BaseController {
         model.addAttribute("seo", getDefaultSeo());
         model.addAttribute("registerEntryFormSubmitUrl", REGISTER_ENTRY_FORM_VALIDATE_PAGE_URL);
 
-        return "guest/registerEntry";
+        return "guest/register/registerEntry";
     }
 
     @PostMapping(REGISTER_ENTRY_FORM_VALIDATE_PAGE_URL)
@@ -122,13 +121,15 @@ public class RegisterController extends BaseController {
         memberApi.registerMember(
                 RegisterMemberDTO.toRegisterMemberDTO(form, bCryptPasswordEncoder));
 
+        clearRegisterSessions(session);
+
         model.addAttribute("seo", getDefaultSeo());
+
         return UrlBasedViewResolver.REDIRECT_URL_PREFIX + ConstUtils.LOGIN_URL;
     }
 
-    public void validate(RegisterEntryForm target, BindingResult bindingResult, Validator... validators) {
-        for (Validator validator : validators) {
-            validator.validate(target, bindingResult);
-        }
+    private void clearRegisterSessions(HttpSession session) {
+        session.removeAttribute(FORM_NAME);
     }
+
 }
