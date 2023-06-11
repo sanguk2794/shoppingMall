@@ -1,8 +1,8 @@
 # shoppingMall
 - Build tool : Gradle 7.6.1, Groovy
 - Front office : 未実装
-- Back office : Java, Spring boot 2.7.3, Spring Security with JWT, Thymeleaf
-- API : Java, Spring boot 2.7.3, Spring Security with JWT, JPA, QueryDSL
+- Back office : 実装中 → Java, Spring boot 2.7.3, Spring Security with JWT, Thymeleaf
+- API : 実装中 → Java, Spring boot 2.7.3, Spring Security with JWT, JPA, QueryDSL
 - DB: H2
 
 - HTML template : [SB Admin 2](https://startbootstrap.com/theme/sb-admin-2)
