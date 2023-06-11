@@ -10,6 +10,7 @@ import feign.Param;
 import feign.RequestLine;
 import net.toyproject.mall.restapi.client.member.model.Member;
 import net.toyproject.mall.restapi.client.member.model.RegisterMemberDTO;
+import net.toyproject.mall.restapi.client.member.model.ResetPasswordDTO;
 import net.toyproject.mall.restapi.client.member.model.UpdateMemberDTO;
 
 @Headers({ "Content-Type: application/json" })
@@ -26,5 +27,11 @@ public interface MemberApi {
 
     @RequestLine("DELETE /v1/member/members/{memberSn}")
     void deleteMember(@Param("memberSn") Long memberSn);
+
+    @RequestLine("GET /v1/member/members?emailAddress={emailAddress}")
+    Member getMemberByEmailAddress(@Param("emailAddress") String emailAddress);
+
+    @RequestLine("PATCH /v1/member/members")
+    void resetPassword(ResetPasswordDTO resetPasswordDTO);
 
 }

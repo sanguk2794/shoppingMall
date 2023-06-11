@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="en">
+
+<th:block th:replace="common/header :: base_header()"/>
+
+<body class="bg-gradient-primary">
+
+<div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-7">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                        </div>
+                        <form class="user" id="registerEntryForm" th:action="@{/}" method="post">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <th:block th:replace="common/parts/memberParts :: firstNameInput()"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <th:block th:replace="common/parts/memberParts :: lastNameInput()"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <th:block th:replace="common/parts/memberParts :: emailAddressInput()"/>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <th:block th:replace="common/parts/memberParts :: passwordInput()"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <th:block th:replace="common/parts/memberParts :: resetPasswordInput()"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <th:block th:replace="common/parts/memberParts :: zipCode1Input()"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <th:block th:replace="common/parts/memberParts :: zipCode2Input()"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <th:block th:replace="common/parts/memberParts :: address1Input()"/>
+                            </div>
+                            <div class="form-group">
+                                <th:block th:replace="common/parts/memberParts :: address2Input()"/>
+                            </div>
+                            <div class="form-group">
+                                <th:block th:replace="common/parts/memberParts :: address3Input()"/>
+                            </div>
+                            <div class="form-group">
+                                <th:block th:replace="common/parts/memberParts :: address4Input()"/>
+                            </div>
+
+                            <a id="registerEntryFormSubmitButton" th:href="@{${registerEntryFormSubmitUrl}}" class="btn btn-primary btn-user btn-block">
+                                Register Account
+                            </a>
+                            <hr>
+                        </form>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="common/footer :: base_footer()"/>
+<script th:src="@{/js/guest/register.js}"></script>
+
+</body>
+
+</html>
