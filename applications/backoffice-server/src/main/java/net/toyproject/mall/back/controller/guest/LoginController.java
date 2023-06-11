@@ -5,10 +5,8 @@
 package net.toyproject.mall.back.controller.guest;
 
 import net.toyproject.mall.back.controller.common.BaseController;
-import net.toyproject.mall.back.controller.common.model.Seo;
 import net.toyproject.mall.back.controller.guest.model.LoginUser;
 import net.toyproject.mall.back.util.ConstUtils;
-import net.toyproject.mall.back.util.SessionUtils;
 import net.toyproject.mall.common.code.LoginProcessStatusCode;
 import net.toyproject.mall.restapi.client.member.MemberApi;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +44,7 @@ public class LoginController extends BaseController {
         model.addAttribute("seo", getDefaultSeo());
         model.addAttribute("loginFormSubmitUrl", ConstUtils.LOGIN_PROCESSING_URL);
 
-        return "guest/login";
+        return "guest/login/login";
     }
 
     private static String getErrorMessage(String errorCode) {

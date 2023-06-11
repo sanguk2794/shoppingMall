@@ -9,7 +9,7 @@ const screenId = "login_screen_lock";
         let form = $(this).parents('form');
         let url = $(this).attr('href');
 
-        loginSubmit(form, url);
+        loginFormSubmit(form, url);
     });
 
     $('.form-control').on('keydown keyup keypress change', function() {
@@ -17,7 +17,7 @@ const screenId = "login_screen_lock";
     });
 })();
 
-function loginSubmit(form, url) {
+function loginFormSubmit(form, url) {
     let token = $("meta[name='_csrf']").attr("content");
     form.attr('action', url)
         .append($('<input/>', {type:'hidden', name:'_csrf', value: token}))

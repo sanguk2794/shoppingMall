@@ -37,10 +37,10 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
             return;
         }
 
-        SavedRequest savedRequest = requestCache.getRequest(request, response);
+        final SavedRequest savedRequest = requestCache.getRequest(request, response);
         String redirectUrl = ConstUtils.DEFAULT_REDIRECT_URL;
         if (!Objects.isNull(savedRequest) && StringUtils.isNotEmpty(savedRequest.getRedirectUrl())) {
-            if (Pattern.compile(".*/|shop|prod|mypage|order|cs|/").matcher(savedRequest.getRedirectUrl()).find()) {
+            if (Pattern.compile(".*/|dashboard|prod|member|order|/").matcher(savedRequest.getRedirectUrl()).find()) {
                 redirectUrl = savedRequest.getRedirectUrl();
             }
         }
