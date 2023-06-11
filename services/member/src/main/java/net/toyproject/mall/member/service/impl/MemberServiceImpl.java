@@ -93,4 +93,16 @@ public class MemberServiceImpl implements MemberService {
 
         return lockCount;
     }
+
+    @Override
+    public void updatePassword(Long memberSn, String memberPassword) {
+        QMember qMember = QMember.member;
+
+        factory.update(qMember)
+                .set(qMember.password, memberPassword)
+                .set(qMember.passwordFailureCount, 0)
+                .set(qMember.lockYN, YN.N)
+                .where(qMember.memberSn.eq(memberSn))
+                .execute();
+    }
 }

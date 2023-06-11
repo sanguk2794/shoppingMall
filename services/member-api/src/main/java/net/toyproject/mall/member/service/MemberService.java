@@ -22,4 +22,6 @@ public interface MemberService {
     boolean isLockMember(Long memberSn);
 
     long increasePasswordVerifyFailureCnt(Long memberSn, Integer passwordFailureCount);
+
+    void updatePassword(Long memberSn, String memberPassword);
 }
