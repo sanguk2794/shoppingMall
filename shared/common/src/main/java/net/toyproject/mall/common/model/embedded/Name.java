@@ -5,9 +5,6 @@
 package net.toyproject.mall.common.model.embedded;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.Embeddable;
 
 @Data
 public class Name {

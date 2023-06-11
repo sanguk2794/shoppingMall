@@ -83,6 +83,8 @@ public class LoginRestApi {
     public TokenDTO getLoginSuccessTokenDTO(TokenDTO tokenDTO, Member member) {
         tokenDTO.setResponseCode(LoginProcessStatusCode.Success);
         tokenDTO.setMemberSn(member.getMemberSn());
+        tokenDTO.setFirstName(member.getName().getFirstName());
+        tokenDTO.setLastName(member.getName().getLastName());
 
         final String accessToken = jwtTokenProvider.createToken(member.getEmailAddress());
         tokenDTO.setAccessToken(accessToken);

@@ -11,6 +11,9 @@ public class TokenDTO implements Serializable {
 
     private LoginProcessStatusCode responseCode;
     private Long memberSn;
+    public String firstName;
+
+    public String lastName;
     private String accessToken;
     private Date accessTokenExpDt;
     private String transferMemberAgreeToken;

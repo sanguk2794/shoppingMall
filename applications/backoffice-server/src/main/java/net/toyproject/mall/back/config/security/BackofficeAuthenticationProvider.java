@@ -53,8 +53,10 @@ public class BackofficeAuthenticationProvider implements AuthenticationProvider 
                             ConstUtils.USER_DUMMY_ID,
                             ConstUtils.USER_DUMMY_PW,
                             tokensResult.getMemberSn(),
+                            tokensResult.getFirstName(),
+                            tokensResult.getLastName(),
                             tokensResult.getAccessToken(),
-                            tokensResult.getAccessTokenExpDt()), authUser);
+                            tokensResult.getAccessTokenExpDt()), ConstUtils.USER_DUMMY_PW, authUser);
         }
     }
 

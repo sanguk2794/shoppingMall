@@ -13,3 +13,21 @@
 
     <script th:src="@{/js/common/common.js}"></script>
 </th:block>
+
+<th:block th:fragment="dashboard_footer()">
+    <th:block th:replace="common/footer :: base_footer"/>
+
+    <!-- Page level plugins -->
+    <script th:src="@{vendor/chart.js/Chart.min.js}"></script>
+
+    <!-- Page level custom scripts -->
+    <script th:src="@{js/demo/chart-area-demo.js}"></script>
+    <script th:src="@{js/demo/chart-pie-demo.js}"></script>
+
+    <script th:src="@{/js/common/common.js}"></script>
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+</th:block>
