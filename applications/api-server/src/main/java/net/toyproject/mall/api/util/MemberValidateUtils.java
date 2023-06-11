@@ -7,6 +7,7 @@ package net.toyproject.mall.api.util;
 import net.toyproject.mall.api.exception.BadRequestException;
 import net.toyproject.mall.api.member.dto.LoginParam;
 import net.toyproject.mall.api.member.dto.RegisterMemberDTO;
+import net.toyproject.mall.api.member.dto.ResetPasswordDTO;
 import net.toyproject.mall.api.member.dto.UpdateMemberDTO;
 import org.apache.commons.lang3.StringUtils;
 
@@ -48,4 +49,15 @@ public class MemberValidateUtils {
             throw new BadRequestException("platform must not null");
         }
     }
+
+    public static void resetPasswordValidate(ResetPasswordDTO resetPasswordDTO) {
+        if (resetPasswordDTO.getMemberSn() == null) {
+            throw new BadRequestException("memberSn must not null");
+        }
+
+        if (!StringUtils.isNotEmpty(resetPasswordDTO.getPassword())) {
+            throw new BadRequestException("password must not null");
+        }
+    }
+
 }

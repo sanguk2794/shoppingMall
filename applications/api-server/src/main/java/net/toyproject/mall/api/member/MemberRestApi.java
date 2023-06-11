@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import net.toyproject.mall.api.exception.BadRequestException;
 import net.toyproject.mall.api.member.dto.RegisterMemberDTO;
+import net.toyproject.mall.api.member.dto.ResetPasswordDTO;
 import net.toyproject.mall.api.member.dto.UpdateMemberDTO;
 import net.toyproject.mall.api.util.MemberUtils;
 import net.toyproject.mall.api.util.MemberValidateUtils;
@@ -41,6 +42,7 @@ public class MemberRestApi {
             @Parameter @RequestBody @Validated RegisterMemberDTO registerMemberDTO) {
 
         MemberValidateUtils.registerMemberValidate(registerMemberDTO);
+
         return new ResponseEntity<>(
                 memberService.createMember(MemberUtils.registerToMember(registerMemberDTO)), HttpStatus.OK);
     }
@@ -51,11 +53,11 @@ public class MemberRestApi {
             @ApiResponse(responseCode = "400", description = "Invalid Parameter"),
             @ApiResponse(responseCode = "500", description = "Internal Error")
     })
-    @RequestMapping(value="/members", method = RequestMethod.GET)
+    @RequestMapping(value="/members/{memberSn}", method = RequestMethod.GET)
     public ResponseEntity<Member> getMember(
             @Parameter @RequestParam @Validated Long memberSn) {
 
-        Member member = memberService.findMember(memberSn);
+        final Member member = memberService.findMember(memberSn);
         if (Objects.isNull(member)) {
             throw new BadRequestException("member was not found");
         }
@@ -70,17 +72,20 @@ public class MemberRestApi {
             @ApiResponse(responseCode = "500", description = "Internal Error")
     })
     @RequestMapping(value="/members", method = RequestMethod.PUT)
-    public ResponseEntity<Member> updateMember(
+    public ResponseEntity<?> updateMember(
             @Parameter @RequestBody @Validated UpdateMemberDTO updateMemberDTO) {
 
         MemberValidateUtils.updateMemberValidate(updateMemberDTO);
-        Member member = memberService.findMember(updateMemberDTO.getMemberSn());
+
+        final Member member = memberService.findMember(updateMemberDTO.getMemberSn());
         if (Objects.isNull(member)) {
             throw new BadRequestException("member was not found");
         }
 
-        return new ResponseEntity<>(
-                memberService.updateMember(MemberUtils.updateToMember(updateMemberDTO, member)), HttpStatus.OK);
+        memberService.updateMember(
+                MemberUtils.updateToMember(updateMemberDTO, member));
+
+        return ResponseEntity.noContent().build();
     }
 
     @Operation(summary = "Delete Member")
@@ -89,7 +94,7 @@ public class MemberRestApi {
             @ApiResponse(responseCode = "400", description = "Invalid Parameter"),
             @ApiResponse(responseCode = "500", description = "Internal Error")
     })
-    @RequestMapping(value="/members", method = RequestMethod.DELETE)
+    @RequestMapping(value="/members/{memberSn}", method = RequestMethod.DELETE)
     public ResponseEntity<Member> deleteMember(
             @Parameter @RequestBody @Validated Long memberSn) {
 
@@ -99,7 +104,46 @@ public class MemberRestApi {
 
         memberService.closeMember(memberSn);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Get Member by email address")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Get Member"),
+            @ApiResponse(responseCode = "400", description = "Invalid Parameter"),
+            @ApiResponse(responseCode = "500", description = "Internal Error")
+    })
+    @RequestMapping(value="/members", method = RequestMethod.GET)
+    public ResponseEntity<Member> getMemberByEmailAddress(
+            @Parameter @RequestParam @Validated String emailAddress) {
+
+        final Member member = memberService.findMemberByEmailAddress(emailAddress);
+        if (Objects.isNull(member)) {
+            throw new BadRequestException("member was not found");
+        }
+
+        return new ResponseEntity<>(member, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Reset Member Password")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Reset Member Password"),
+            @ApiResponse(responseCode = "400", description = "Invalid Parameter"),
+            @ApiResponse(responseCode = "500", description = "Internal Error")
+    })
+    @RequestMapping(value="/members", method = RequestMethod.PATCH)
+    public ResponseEntity<Member> resetPassword(
+            @Parameter @RequestBody @Validated ResetPasswordDTO resetPasswordDTO) {
+
+        MemberValidateUtils.resetPasswordValidate(resetPasswordDTO);
+
+        if (Objects.isNull(memberService.findMember(resetPasswordDTO.getMemberSn()))) {
+            throw new BadRequestException("member was not found");
+        }
+
+        memberService.updatePassword(
+                resetPasswordDTO.getMemberSn(), resetPasswordDTO.getPassword());
+
+        return ResponseEntity.noContent().build();
+    }
 }
