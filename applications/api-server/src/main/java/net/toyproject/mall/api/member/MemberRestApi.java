@@ -33,7 +33,7 @@ public class MemberRestApi {
 
     @Operation(summary = "Register Member")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Register Member"),
+            @ApiResponse(responseCode = "201", description = "Register Member"),
             @ApiResponse(responseCode = "400", description = "Invalid Parameter"),
             @ApiResponse(responseCode = "500", description = "Internal Error")
     })
@@ -44,7 +44,7 @@ public class MemberRestApi {
         MemberValidateUtils.registerMemberValidate(registerMemberDTO);
 
         return new ResponseEntity<>(
-                memberService.createMember(MemberUtils.registerToMember(registerMemberDTO)), HttpStatus.OK);
+                memberService.createMember(MemberUtils.registerToMember(registerMemberDTO)), HttpStatus.CREATED);
     }
 
     @Operation(summary = "Get Member")

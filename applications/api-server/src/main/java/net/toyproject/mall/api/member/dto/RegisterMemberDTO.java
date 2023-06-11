@@ -14,7 +14,6 @@ public class RegisterMemberDTO {
 
     private String emailAddress;
     private String password;
-    private String nickName;
     private Name name;
     private Address address;
     private MemberPlatform memberPlatform;
