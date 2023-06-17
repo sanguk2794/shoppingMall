@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class DashboardController extends BaseController {
 
-    @RequestMapping("/dashboard/")
+    @RequestMapping("/dashboard")
     public String dashboardPage(@AuthenticationPrincipal LoginUser loginUser,
                                 HttpServletRequest req,
                                 Model model) {

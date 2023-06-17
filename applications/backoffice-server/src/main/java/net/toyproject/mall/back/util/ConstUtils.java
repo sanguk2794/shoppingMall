@@ -36,7 +36,7 @@ public class ConstUtils {
 
     public static final String LOGIN_COOKIE_NAME = "JSESSIONID";
 
-    public static final String DEFAULT_REDIRECT_URL = "/dashboard/";
+    public static final String DEFAULT_REDIRECT_URL = "/dashboard";
 
     public static final String CSRF_PARAMETER_NAME = "_csrf";
 
