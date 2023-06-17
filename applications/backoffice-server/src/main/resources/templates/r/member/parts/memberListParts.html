@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="member_list(members)">
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <!-- table header -->
+                <thead>
+                    <th:block th:replace="member/parts/memberListParts :: member_table_header()"/>
+                </thead>
+                <!-- table body -->
+                <tbody>
+                    <th:block th:replace="member/parts/memberListParts :: member_table_body(${members})"/>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</th:block>
+
+<th:block th:fragment="member_table_header()">
+    <tr role="row">
+        <th>memberSn</th>
+        <th>emailAddress</th>
+        <th>name</th>
+        <th>zipCode</th>
+        <th>address1</th>
+        <th>address2</th>
+        <th>address3</th>
+        <th>address4</th>
+        <th>memberStatus</th>
+        <th>memberPlatform</th>
+    </tr>
+</th:block>
+
+<th:block th:fragment="member_table_body(members)">
+    <tr role="row" th:each="member : ${members}">
+        <th th:text="${member.memberSn}"></th>
+        <th th:text="${member.emailAddress}"></th>
+        <th>[[${member.name.firstName}]] [[${member.name.lastName}]]</th>
+        <th th:text="${member.address.zipCode}"></th>
+        <th th:text="${member.address.address1}"></th>
+        <th th:text="${member.address.address2}"></th>
+        <th th:text="${member.address.address3}"></th>
+        <th th:text="${member.address.address4}"></th>
+        <th th:text="${member.memberStatus}"></th>
+        <th th:text="${member.memberPlatform}"></th>
+    </tr>
+</th:block>

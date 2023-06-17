@@ -5,6 +5,7 @@
 package net.toyproject.mall.member.service.impl;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import net.toyproject.mall.common.code.OrderBy;
 import net.toyproject.mall.common.code.YN;
 import net.toyproject.mall.member.model.Member;
 import net.toyproject.mall.member.model.QMember;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -37,6 +39,25 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member findMember(Long memberSn) {
         return repository.findById(memberSn).orElse(null);
+    }
+
+    @Override
+    public Integer getMembersCount() {
+        QMember qMember = QMember.member;
+
+        return factory.selectFrom(qMember).fetch().size();
+    }
+
+    @Override
+    public List<Member> findMembers(int offset, int limit, OrderBy orderBy) {
+        QMember qMember = QMember.member;
+
+        return factory.selectFrom(qMember)
+                .orderBy(orderBy == OrderBy.Desc ?
+                        qMember.memberSn.desc() : qMember.memberSn.asc())
+                .offset(offset)
+                .limit(limit)
+                .fetch();
     }
 
     @Override

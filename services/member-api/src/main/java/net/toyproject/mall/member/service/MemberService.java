@@ -1,13 +1,20 @@
 package net.toyproject.mall.member.service;
 
+import net.toyproject.mall.common.code.OrderBy;
 import net.toyproject.mall.common.code.YN;
 import net.toyproject.mall.member.model.Member;
+
+import java.util.List;
 
 public interface MemberService {
 
     Member createMember(Member member);
 
     Member findMember(Long memberSn);
+
+    Integer getMembersCount();
+
+    List<Member> findMembers(int offset, int limit, OrderBy orderBy);
 
     Member findMemberByEmailAddress(String emailAddress);
 

@@ -8,10 +8,10 @@ package net.toyproject.mall.restapi.client.member;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
-import net.toyproject.mall.restapi.client.member.model.Member;
-import net.toyproject.mall.restapi.client.member.model.RegisterMemberDTO;
-import net.toyproject.mall.restapi.client.member.model.ResetPasswordDTO;
-import net.toyproject.mall.restapi.client.member.model.UpdateMemberDTO;
+import net.toyproject.mall.common.code.OrderBy;
+import net.toyproject.mall.restapi.client.member.model.*;
+
+import java.util.List;
 
 @Headers({ "Content-Type: application/json" })
 public interface MemberApi {
@@ -21,6 +21,11 @@ public interface MemberApi {
 
     @RequestLine("GET /v1/member/members/{memberSn}")
     Member getMember(@Param("memberSn") Long memberSn);
+
+    @RequestLine("GET /v1/member/members/list?offset={offset}&limit={limit}&orderBy={orderBy}")
+    MembersDTO getMembers(@Param("offset") Integer offset,
+                          @Param("limit") Integer limit,
+                          @Param("orderBy") OrderBy orderBy);
 
     @RequestLine("PUT /v1/member/members")
     void updateMember(UpdateMemberDTO updateMemberDTO);

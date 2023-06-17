@@ -9,11 +9,13 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import net.toyproject.mall.api.exception.BadRequestException;
+import net.toyproject.mall.api.member.dto.MembersDTO;
 import net.toyproject.mall.api.member.dto.RegisterMemberDTO;
 import net.toyproject.mall.api.member.dto.ResetPasswordDTO;
 import net.toyproject.mall.api.member.dto.UpdateMemberDTO;
 import net.toyproject.mall.api.util.MemberUtils;
 import net.toyproject.mall.api.util.MemberValidateUtils;
+import net.toyproject.mall.common.code.OrderBy;
 import net.toyproject.mall.member.model.Member;
 import net.toyproject.mall.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -63,6 +66,25 @@ public class MemberRestApi {
         }
 
         return new ResponseEntity<>(member, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Get Members")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Get Member"),
+            @ApiResponse(responseCode = "400", description = "Invalid Parameter"),
+            @ApiResponse(responseCode = "500", description = "Internal Error")
+    })
+    @RequestMapping(value="/members/list", method = RequestMethod.GET)
+    public ResponseEntity<MembersDTO> getMembers(
+            @Parameter @RequestParam @Validated Integer offset,
+            @Parameter @RequestParam @Validated Integer limit,
+            @Parameter @RequestParam @Validated OrderBy orderBy) {
+
+        MembersDTO membersDTO = new MembersDTO();
+        membersDTO.setTotalCount(memberService.getMembersCount());
+        membersDTO.setMembers(memberService.findMembers(offset, limit, orderBy));
+
+        return new ResponseEntity<>(membersDTO, HttpStatus.OK);
     }
 
     @Operation(summary = "Update Member")
