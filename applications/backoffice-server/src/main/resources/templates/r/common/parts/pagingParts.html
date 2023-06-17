@@ -1,0 +1,123 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="base_paging(paging, url)">
+    <div class="row">
+        <div class="col-sm-12 col-md-5">
+            <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
+                Total [[${paging.totalCount}]] entries
+            </div>
+        </div>
+
+        <div th:if="${paging.endPage > 0}" class="col-sm-12 col-md-7">
+            <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                <ul class="pagination">
+                    <th:block th:if="${paging.currentPage == 0}">
+                        <th:block th:replace="common/parts/pagingParts :: print_paging_numbers(${paging}, ${url}, 1)"/>
+                    </th:block>
+
+                    <th:block th:if="${0 < paging.endPage and paging.endPage <= paging.limitCount}">
+                        <th:block th:replace="common/parts/pagingParts :: less_than_limit_count(${paging}, ${url})"/>
+                    </th:block>
+
+                    <th:block th:if="${paging.limitCount < paging.endPage}" th:with="boundary=${paging.limitCount / 2}">
+                        <th:block th:replace="common/parts/pagingParts :: greater_than_limit_count(${paging}, ${url}, ${boundary})"/>
+                    </th:block>
+                </ul>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block th:fragment="less_than_limit_count(paging, url)">
+    <th:block th:if="${1 < paging.currentPage}">
+        <th:block th:replace="common/parts/pagingParts :: print_previous_button(${paging}, ${url})"/>
+    </th:block>
+
+    <th:block th:each="i : ${#numbers.sequence(1, paging.endPage)}">
+        <th:block th:replace="common/parts/pagingParts :: print_paging_numbers(${paging}, ${url}, ${i})"/>
+    </th:block>
+
+    <th:block th:if="${paging.currentPage < paging.endPage}">
+        <th:block th:replace="common/parts/pagingParts :: print_next_button(${paging}, ${url})"/>
+    </th:block>
+</th:block>
+
+<th:block th:fragment="greater_than_limit_count(paging, url, boundary)">
+
+    <th:block th:if="${1 < paging.currentPage}">
+        <th:block th:replace="common/parts/pagingParts :: print_previous_button(${paging}, ${url})"/>
+    </th:block>
+
+    <th:block th:if="${paging.currentPage <= boundary + 1}">
+        <th:block th:each="i : ${#numbers.sequence(1, paging.limitCount)}">
+            <th:block th:replace="common/parts/pagingParts :: print_paging_numbers(${paging}, ${url}, ${i})"/>
+        </th:block>
+
+        <th:block th:replace="common/parts/pagingParts :: print_end_page_numbers(${paging}, ${url})"/>
+    </th:block>
+
+    <th:block th:if="${boundary + 1 < paging.currentPage and paging.currentPage < paging.endPage - boundary + 1}">
+        <th:block th:replace="common/parts/pagingParts :: print_start_page_number(${paging}, ${url})"/>
+
+        <th:block th:each="i : ${#numbers.sequence(paging.currentPage - boundary, paging.currentPage + boundary - 1)}">
+            <th:block th:replace="common/parts/pagingParts :: print_paging_numbers(${paging}, ${url}, ${i})"/>
+        </th:block>
+
+        <th:block th:replace="common/parts/pagingParts :: print_end_page_numbers(${paging}, ${url})"/>
+    </th:block>
+
+    <th:block th:if="${paging.endPage - boundary + 1 <= paging.currentPage}">
+        <th:block th:replace="common/parts/pagingParts :: print_start_page_number(${paging}, ${url})"/>
+
+        <th:block th:each="i : ${#numbers.sequence(paging.endPage - paging.limitCount + 1, paging.endPage)}">
+            <th:block th:replace="common/parts/pagingParts :: print_paging_numbers(${paging}, ${url}, ${i})"/>
+        </th:block>
+    </th:block>
+
+    <th:block th:if="${paging.currentPage < paging.endPage}">
+        <th:block th:replace="common/parts/pagingParts :: print_next_button(${paging}, ${url})"/>
+    </th:block>
+</th:block>
+
+<th:block th:fragment="print_paging_numbers(paging, url, i)">
+    <li th:class="'paginate_button page-item' + ${(paging.currentPage == i) ? ' active' : ''}">
+        <a th:href="@{__${url}__?page=__${i}__}"
+           aria-controls="dataTable" tabindex="0" class="page-link">[[${i}]]</a>
+    </li>
+</th:block>
+
+<th:block th:fragment="print_start_page_number(paging, url)">
+    <li class="paginate_button page-item">
+        <a th:href="@{__${url}__?page=__${1}__}"
+           aria-controls="dataTable" tabindex="0" class="page-link">1</a>
+    </li>
+
+    <li class="paginate_button page-item disabled">
+        <a href="#" aria-controls="dataTable" tabindex="0" class="page-link">...</a>
+    </li>
+</th:block>
+
+<th:block th:fragment="print_end_page_numbers(paging, url)">
+    <li class="paginate_button page-item disabled">
+        <a href="#" aria-controls="dataTable" tabindex="0" class="page-link">...</a>
+    </li>
+
+    <li class="paginate_button page-item">
+        <a th:href="@{__${url}__?page=__${paging.endPage}__}"
+           aria-controls="dataTable" tabindex="0" class="page-link">[[${paging.endPage}]]</a>
+    </li>
+</th:block>
+
+<th:block th:fragment="print_next_button(paging, url)">
+    <li id="dataTable_next" class="paginate_button page-item next">
+        <a th:href="@{__${url}__?page=__${paging.currentPage + 1}__}"
+           aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Next</a>
+    </li>
+</th:block>
+
+<th:block th:fragment="print_previous_button(paging, url)">
+    <li id="dataTable_previous" class="paginate_button page-item previous">
+        <a th:href="@{__${url}__?page=__${paging.currentPage - 1}__}"
+           aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+    </li>
+</th:block>
+
