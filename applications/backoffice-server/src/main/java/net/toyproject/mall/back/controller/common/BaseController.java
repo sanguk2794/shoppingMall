@@ -41,39 +41,9 @@ public class BaseController {
         return errors;
     }
 
-    public void validate(CommonEntryForm target, BindingResult bindingResult, Validator... validators) {
+    protected void validate(CommonEntryForm target, BindingResult bindingResult, Validator... validators) {
         for (Validator validator : validators) {
             validator.validate(target, bindingResult);
         }
     }
-
-    protected static int getOffset(Integer pageNumber, int limitCount) {
-        int offset = 0;
-        if (!Objects.isNull(pageNumber)) {
-            offset = limitCount * (pageNumber - 1);
-        }
-
-        return offset;
-    }
-
-    protected Paging setPagingParameter(int totalCount,
-                                        int limitCount,
-                                        Integer currentPageNumber) {
-
-        Paging paging = new Paging();
-        paging.setTotalCount(totalCount);
-        paging.setLimitCount(limitCount);
-
-        // 最後のページ番号を取得
-        int endPageNum = totalCount % limitCount == 0 ?
-                totalCount / limitCount : totalCount / limitCount + 1;
-        paging.setEndPage(endPageNum);
-
-        if (currentPageNumber != null) {
-            paging.setCurrentPage(currentPageNumber);
-        }
-
-        return paging;
-    }
-
 }

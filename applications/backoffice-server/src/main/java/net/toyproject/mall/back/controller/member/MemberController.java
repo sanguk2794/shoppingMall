@@ -4,21 +4,23 @@
 
 package net.toyproject.mall.back.controller.member;
 
-import net.toyproject.mall.back.controller.common.BaseController;
+import net.toyproject.mall.back.controller.common.DashBoardController;
+import net.toyproject.mall.back.util.SessionUtils;
 import net.toyproject.mall.common.code.OrderBy;
 import net.toyproject.mall.restapi.client.member.MemberApi;
 import net.toyproject.mall.restapi.client.member.model.MembersDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/dashboard")
-public class MemberController extends BaseController {
+public class MemberController extends DashBoardController {
 
     private static final int LIMIT_COUNT = 10;
 
@@ -32,11 +34,7 @@ public class MemberController extends BaseController {
                                  HttpServletRequest req,
                                  Model model) {
 
-        model.addAttribute("name", "member list");
-        model.addAttribute("detail", "DataTables is a third party plugin that is used to generate the demo table below.\n" +
-                "                        For more information about DataTables, please visit the <a target=\"_blank\"\n" +
-                "                            href=\"https://datatables.net\">official DataTables documentation</a>.");
-
+        model.addAttribute("dashboard", getDashboard("member list", "check member list"));
         model.addAttribute("seo", getDefaultSeo());
 
         final int offset = getOffset(page, LIMIT_COUNT);
@@ -48,6 +46,4 @@ public class MemberController extends BaseController {
 
         return "member/memberList";
     }
-
-
 }

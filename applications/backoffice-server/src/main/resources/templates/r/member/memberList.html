@@ -20,10 +20,7 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800" th:text="${name}"></h1>
-                    <p class="mb-4" th:utext="${detail}"></p>
+                    <th:block th:replace="common/parts/dashboardParts :: dashboard_header(${dashboard})"/>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">

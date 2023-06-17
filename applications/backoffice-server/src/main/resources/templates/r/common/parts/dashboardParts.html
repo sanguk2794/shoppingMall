@@ -1,0 +1,6 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="dashboard_header(dashboard)">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800" th:text="${dashboard.name}"></h1>
+    <p class="mb-4" th:utext="${dashboard.detail}"></p>
+</th:block>
