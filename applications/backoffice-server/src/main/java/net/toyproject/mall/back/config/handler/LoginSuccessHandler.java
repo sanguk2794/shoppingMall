@@ -21,9 +21,6 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-/**
- * ログイン成功後のカスタム処理
- */
 @Component
 public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 

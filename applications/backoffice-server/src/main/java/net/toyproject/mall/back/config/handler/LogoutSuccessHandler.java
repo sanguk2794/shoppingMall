@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class LogoutSuccessHandler implements LogoutHandler {
+
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
     }
+
 }

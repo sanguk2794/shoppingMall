@@ -5,19 +5,16 @@
 package net.toyproject.mall.back.controller.member;
 
 import net.toyproject.mall.back.controller.common.DashBoardController;
-import net.toyproject.mall.back.util.SessionUtils;
 import net.toyproject.mall.common.code.OrderBy;
 import net.toyproject.mall.restapi.client.member.MemberApi;
 import net.toyproject.mall.restapi.client.member.model.MembersDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class MemberController extends DashBoardController {

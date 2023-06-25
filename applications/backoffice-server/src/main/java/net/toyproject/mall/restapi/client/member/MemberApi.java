@@ -11,8 +11,6 @@ import feign.RequestLine;
 import net.toyproject.mall.common.code.OrderBy;
 import net.toyproject.mall.restapi.client.member.model.*;
 
-import java.util.List;
-
 @Headers({ "Content-Type: application/json" })
 public interface MemberApi {
 

@@ -18,6 +18,7 @@ public class SessionUtils {
         if (session == null){
             session = req.getSession(true);
         }
+
         return session;
     }
 }
