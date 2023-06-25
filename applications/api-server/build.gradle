@@ -21,6 +21,7 @@ dependencies {
     implementation project(':shared:base')
     implementation project(':services:member')
     implementation project(':services:co')
+    implementation project(':services:prod')
 
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

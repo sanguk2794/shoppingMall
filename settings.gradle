@@ -16,6 +16,8 @@ include 'shared:base-api'
 // service
 include 'services:member'
 include 'services:member-api'
+include 'services:prod'
+include 'services:prod-api'
 include 'services:co'
 include 'services:co-api'
 
