@@ -15,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import javax.transaction.NotSupportedException;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -82,17 +84,17 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member resetPassword(Long memberSn, String newPassword) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Member closeMember(Long memberSn) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean isLockMember(Long memberSn) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -106,7 +108,7 @@ public class MemberServiceImpl implements MemberService {
         Integer lockCount = factory.select(qMember.passwordFailureCount)
                 .from(qMember)
                 .where(qMember.memberSn.eq(memberSn))
-                .fetchFirst();
+                .fetchOne();
 
         if (lockCount >= accountLockLoginFailCount) {
             lockMember(memberSn, YN.Y);
@@ -116,14 +118,14 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void updatePassword(Long memberSn, String memberPassword) {
+    public boolean updatePassword(Long memberSn, String memberPassword) {
         QMember qMember = QMember.member;
 
-        factory.update(qMember)
+        return factory.update(qMember)
                 .set(qMember.password, memberPassword)
                 .set(qMember.passwordFailureCount, 0)
                 .set(qMember.lockYN, YN.N)
                 .where(qMember.memberSn.eq(memberSn))
-                .execute();
+                .execute() > 0;
     }
 }

@@ -70,19 +70,22 @@ public class MemberRestApiTest {
     private static RegisterMemberDTO getSuccessRegisterMemberParam() {
         RegisterMemberDTO registerMemberDTO = new RegisterMemberDTO();
         registerMemberDTO.setEmailAddress("sanguk2794@gmail.com");
+        registerMemberDTO.setPassword("1q2w3e4r");
+        registerMemberDTO.setMemberPlatform(MemberPlatform.BackOffice);
+
         final Name name = new Name();
         name.setFirstName("LEE");
         name.setLastName("SANG");
         registerMemberDTO.setName(name);
-        registerMemberDTO.setPassword("1q2w3e4r");
-        Address address = new Address();
+
+        final Address address = new Address();
         address.setZipCode("3330853");
         address.setAddress1("123123");
         address.setAddress2("123123");
         address.setAddress3("123123");
         address.setAddress4("123123");
         registerMemberDTO.setAddress(address);
-        registerMemberDTO.setMemberPlatform(MemberPlatform.BackOffice);
+
         return registerMemberDTO;
     }
 
@@ -93,19 +96,21 @@ public class MemberRestApiTest {
 
         // Given
         RegisterMemberDTO registerMemberDTO = new RegisterMemberDTO();
+        registerMemberDTO.setPassword("1q2w3e4r");
+        registerMemberDTO.setMemberPlatform(MemberPlatform.BackOffice);
+
         final Name name = new Name();
         name.setFirstName("LEE");
         name.setLastName("SANG");
         registerMemberDTO.setName(name);
-        registerMemberDTO.setPassword("1q2w3e4r");
-        Address address = new Address();
+
+        final Address address = new Address();
         address.setZipCode("3330853");
         address.setAddress1("123123");
         address.setAddress2("123123");
         address.setAddress3("123123");
         address.setAddress4("123123");
         registerMemberDTO.setAddress(address);
-        registerMemberDTO.setMemberPlatform(MemberPlatform.BackOffice);
 
         // When
         ResultActions resultActions = mockMvc.perform(post(url)
@@ -125,18 +130,21 @@ public class MemberRestApiTest {
         // Given
         RegisterMemberDTO registerMemberDTO = new RegisterMemberDTO();
         registerMemberDTO.setEmailAddress("sanguk2794@gmail.com");
+        registerMemberDTO.setMemberPlatform(MemberPlatform.BackOffice);
+
         final Name name = new Name();
         name.setFirstName("LEE");
         name.setLastName("SANG");
         registerMemberDTO.setName(name);
-        Address address = new Address();
+
+        final Address address = new Address();
         address.setZipCode("3330853");
         address.setAddress1("123123");
         address.setAddress2("123123");
         address.setAddress3("123123");
         address.setAddress4("123123");
         registerMemberDTO.setAddress(address);
-        registerMemberDTO.setMemberPlatform(MemberPlatform.BackOffice);
+
 
         // When
         ResultActions resultActions = mockMvc.perform(post(url)
@@ -161,7 +169,7 @@ public class MemberRestApiTest {
         name.setLastName("SANG");
         registerMemberDTO.setName(name);
         registerMemberDTO.setPassword("1q2w3e4r");
-        Address address = new Address();
+        final Address address = new Address();
         address.setZipCode("3330853");
         address.setAddress1("123123");
         address.setAddress2("123123");

@@ -1,9 +1,11 @@
 dependencies {
     api project(':services:member-api')
     api project(':shared:base-api')
+
+    // test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-// Temporary skip tests. Because, This Project Tests dose not work.
 test {
-    onlyIf { false }
+    useJUnitPlatform()
 }
