@@ -31,4 +31,5 @@ public interface MemberService {
     long increasePasswordVerifyFailureCnt(Long memberSn, Integer passwordFailureCount);
 
     boolean updatePassword(Long memberSn, String memberPassword);
+
 }

@@ -1,5 +1,4 @@
 package net.toyproject.mall.prod.service;
-/*
 
 import net.toyproject.mall.common.code.OrderBy;
 import net.toyproject.mall.prod.model.Prod;
@@ -21,4 +20,3 @@ public interface ProdService {
     long deleteProd(Long prodSn);
 
 }
-*/
