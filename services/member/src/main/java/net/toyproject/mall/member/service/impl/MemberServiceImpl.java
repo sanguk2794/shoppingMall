@@ -94,7 +94,12 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public boolean isLockMember(Long memberSn) {
-        throw new UnsupportedOperationException();
+        QMember qMember = QMember.member;
+
+        return factory.select(qMember.lockYN)
+                .from(qMember)
+                .where(qMember.memberSn.eq(memberSn))
+                .fetchOne() == YN.Y;
     }
 
     @Override

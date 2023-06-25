@@ -48,6 +48,9 @@ class MemberServiceImplTest {
     private JPAQuery<Integer> jpaIntegerQuery;
 
     @Mock
+    private JPAQuery<YN> jpaYnQuery;
+
+    @Mock
     private JPAUpdateClause jpaUpdateClause;
 
     @InjectMocks
@@ -277,14 +280,45 @@ class MemberServiceImplTest {
     }
 
     @Test
-    @DisplayName("ロック可否（未実装）")
-    void isLockMember() {
+    @DisplayName("ロック可否（成功）")
+    void isLockMemberSuccess() {
         // given
+        QMember qMember = QMember.member;
         Long fakeMemberSn = 1L;
 
-        // when then
-        assertThrows(UnsupportedOperationException.class, () -> memberService.isLockMember(fakeMemberSn));
+        // mocking
+        when(factory.select(qMember.lockYN)).thenReturn(jpaYnQuery);
+        when(jpaYnQuery.from(qMember)).thenReturn(jpaYnQuery);
+        when(jpaYnQuery.where(qMember.memberSn.eq(fakeMemberSn))).thenReturn(jpaYnQuery);
+        when(jpaYnQuery.fetchOne()).thenReturn(YN.Y);
+
+        // when
+        final boolean yn = memberService.isLockMember(fakeMemberSn);
+
+        // then
+        assertTrue(yn);
     }
+
+    @Test
+    @DisplayName("ロック可否（失敗）")
+    void isLockMemberFailure() {
+        // given
+        QMember qMember = QMember.member;
+        Long fakeMemberSn = 1L;
+
+        // mocking
+        when(factory.select(qMember.lockYN)).thenReturn(jpaYnQuery);
+        when(jpaYnQuery.from(qMember)).thenReturn(jpaYnQuery);
+        when(jpaYnQuery.where(qMember.memberSn.eq(fakeMemberSn))).thenReturn(jpaYnQuery);
+        when(jpaYnQuery.fetchOne()).thenReturn(YN.N);
+
+        // when
+        final boolean yn = memberService.isLockMember(fakeMemberSn);
+
+        // then
+        assertFalse(yn);
+    }
+
 
     @Test
     void increasePasswordVerifyFailureCnt() {
