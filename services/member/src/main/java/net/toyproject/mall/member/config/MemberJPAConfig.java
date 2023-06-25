@@ -20,11 +20,4 @@ import javax.persistence.PersistenceContext;
 @EntityScan("net.toyproject.mall.member")
 public class MemberJPAConfig {
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    @Bean
-    public JPAQueryFactory jpaQueryFactory() {
-        return new JPAQueryFactory(entityManager);
-    }
 }
