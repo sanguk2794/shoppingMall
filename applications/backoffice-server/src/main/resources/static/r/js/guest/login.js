@@ -1,7 +1,6 @@
 const screenId = "login_screen_lock";
 
 (function() {
-
     $('#loginFormSubmit').on('click', function(e) {
         e.preventDefault();
         lockScreen(screenId);

@@ -18,8 +18,7 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity(name = "Member")
-@Table(name = "MEMBER")
+@Entity
 @SequenceGenerator(name = "MEMBER_SEQ_GENERATOR", sequenceName = "MEMBER_SEQ", allocationSize = 1)
 public class Member extends BaseEntity {
 
