@@ -29,7 +29,7 @@ configure(ext.get('allProjects')) {
 
 	group = 'net.toyproject.mall'
 	version = '0.0.1-SNAPSHOT'
-	description = "${rootProject.description} (${group}:${name}:${version})"
+	description = "${group}:${name}:${version}"
 
 	tasks.withType(AbstractCompile).each {
 		it.options.encoding = 'UTF-8'

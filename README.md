@@ -12,15 +12,19 @@
 $ gradle -q projects
 
 Root project 'project-shopping-mall'
-+--- Project ':applications' - null (net.toyproject.mall:applications:0.0.1-SNAPSHOT)
-|    +--- Project ':applications:api-server' - null (net.toyproject.mall:api-server:0.0.1-SNAPSHOT)
-|    +--- Project ':applications:backoffice-server' - null (net.toyproject.mall:backoffice-server:0.0.1-SNAPSHOT)
-|    \--- Project ':applications:frontoffice-server' - null (net.toyproject.mall:frontoffice-server:0.0.1-SNAPSHOT)
-+--- Project ':services' - null (net.toyproject.mall:services:0.0.1-SNAPSHOT)
-|    +--- Project ':services:member' - null (net.toyproject.mall:member:0.0.1-SNAPSHOT)
-|    \--- Project ':services:member-api' - null (net.toyproject.mall:member-api:0.0.1-SNAPSHOT)
-\--- Project ':shared' - null (net.toyproject.mall:shared:0.0.1-SNAPSHOT)
-     +--- Project ':shared:base' - null (net.toyproject.mall:base:0.0.1-SNAPSHOT)
-     +--- Project ':shared:base-api' - null (net.toyproject.mall:base-api:0.0.1-SNAPSHOT)
-     \--- Project ':shared:common' - null (net.toyproject.mall:common:0.0.1-SNAPSHOT)
++--- Project ':applications' - net.toyproject.mall:applications:0.0.1-SNAPSHOT
+|    +--- Project ':applications:api-server' - net.toyproject.mall:api-server:0.0.1-SNAPSHOT
+|    +--- Project ':applications:backoffice-server' - net.toyproject.mall:backoffice-server:0.0.1-SNAPSHOT
+|    \--- Project ':applications:frontoffice-server' - net.toyproject.mall:frontoffice-server:0.0.1-SNAPSHOT
++--- Project ':services' - net.toyproject.mall:services:0.0.1-SNAPSHOT
+|    +--- Project ':services:co' - net.toyproject.mall:co:0.0.1-SNAPSHOT
+|    +--- Project ':services:co-api' - net.toyproject.mall:co-api:0.0.1-SNAPSHOT
+|    +--- Project ':services:member' - net.toyproject.mall:member:0.0.1-SNAPSHOT
+|    +--- Project ':services:member-api' - net.toyproject.mall:member-api:0.0.1-SNAPSHOT
+|    +--- Project ':services:prod' - net.toyproject.mall:prod:0.0.1-SNAPSHOT
+|    \--- Project ':services:prod-api' - net.toyproject.mall:prod-api:0.0.1-SNAPSHOT
+\--- Project ':shared' - net.toyproject.mall:shared:0.0.1-SNAPSHOT
+     +--- Project ':shared:base' - net.toyproject.mall:base:0.0.1-SNAPSHOT
+     +--- Project ':shared:base-api' - net.toyproject.mall:base-api:0.0.1-SNAPSHOT
+     \--- Project ':shared:common' - net.toyproject.mall:common:0.0.1-SNAPSHOT
 ~~~
