@@ -58,7 +58,7 @@ public class BackofficeSecurityConfig {
                 .loginPage(ConstUtils.LOGIN_URL)
                 .loginProcessingUrl(ConstUtils.LOGIN_PROCESSING_URL)
                 .failureHandler(authenticationFailureHandler)
-                .defaultSuccessUrl("/dashboard", false)
+                .defaultSuccessUrl(ConstUtils.DASHBOARD_URL, false)
                 .successHandler(loginSuccessHandler)
                 .usernameParameter("username")
                 .passwordParameter("password")

@@ -65,7 +65,7 @@ public class RemindController extends BaseController {
         session.removeAttribute(REMIND_FORM_NAME);
 
         if (loginUser != null) {
-            return UrlBasedViewResolver.REDIRECT_URL_PREFIX + ConstUtils.DEFAULT_REDIRECT_URL;
+            return UrlBasedViewResolver.REDIRECT_URL_PREFIX + ConstUtils.DASHBOARD_URL;
         }
 
         final RemindEntryForm form = new RemindEntryForm();
@@ -80,7 +80,7 @@ public class RemindController extends BaseController {
                                   Model model) {
 
         if (loginUser != null) {
-            return UrlBasedViewResolver.REDIRECT_URL_PREFIX + ConstUtils.DEFAULT_REDIRECT_URL;
+            return UrlBasedViewResolver.REDIRECT_URL_PREFIX + ConstUtils.DASHBOARD_URL;
         }
 
         final HttpSession session = SessionUtils.getSession(req);
@@ -126,7 +126,7 @@ public class RemindController extends BaseController {
 
         final HttpSession session = SessionUtils.getSession(req);
         if (loginUser != null) {
-            return UrlBasedViewResolver.REDIRECT_URL_PREFIX + ConstUtils.DEFAULT_REDIRECT_URL;
+            return UrlBasedViewResolver.REDIRECT_URL_PREFIX + ConstUtils.DASHBOARD_URL;
         }
 
         final RemindEntryForm remindEntryForm = (RemindEntryForm) session.getAttribute(REMIND_FORM_NAME);
@@ -146,7 +146,7 @@ public class RemindController extends BaseController {
                                          Model model) {
 
         if (loginUser != null) {
-            return UrlBasedViewResolver.REDIRECT_URL_PREFIX + ConstUtils.DEFAULT_REDIRECT_URL;
+            return UrlBasedViewResolver.REDIRECT_URL_PREFIX + ConstUtils.DASHBOARD_URL;
         }
 
         final HttpSession session = SessionUtils.getSession(req);

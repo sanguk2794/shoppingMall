@@ -5,6 +5,7 @@
 package net.toyproject.mall.back.controller.member;
 
 import net.toyproject.mall.back.controller.common.DashBoardController;
+import net.toyproject.mall.back.util.ConstUtils;
 import net.toyproject.mall.common.code.OrderBy;
 import net.toyproject.mall.restapi.client.member.MemberApi;
 import net.toyproject.mall.restapi.client.member.model.MembersDTO;
@@ -31,13 +32,14 @@ public class MemberController extends DashBoardController {
                                  HttpServletRequest req,
                                  Model model) {
 
-        model.addAttribute("dashboard", getDashboard("member list", "check member list"));
+        model.addAttribute("dashboard", getDashboard("Member dashboard", "Details of member dashboard"));
         model.addAttribute("seo", getDefaultSeo());
 
         final int offset = getOffset(page, LIMIT_COUNT);
         final MembersDTO membersDTO = memberApi.getMembers(offset, LIMIT_COUNT, OrderBy.Asc);
 
         model.addAttribute("pageUrl", "/dashboard" + MEMBER_LIST_PAGE_URL);
+        model.addAttribute("pageUrl", ConstUtils.DASHBOARD_URL + MEMBER_LIST_PAGE_URL);
         model.addAttribute("members", membersDTO.getMembers());
         model.addAttribute("paging", setPagingParameter(membersDTO.getTotalCount(), LIMIT_COUNT, page));
 

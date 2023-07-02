@@ -35,7 +35,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         }
 
         final SavedRequest savedRequest = requestCache.getRequest(request, response);
-        String redirectUrl = ConstUtils.DEFAULT_REDIRECT_URL;
+        String redirectUrl = ConstUtils.DASHBOARD_URL;
         if (!Objects.isNull(savedRequest) && StringUtils.isNotEmpty(savedRequest.getRedirectUrl())) {
             if (Pattern.compile(".*/|dashboard|prod|member|order|/").matcher(savedRequest.getRedirectUrl()).find()) {
                 redirectUrl = savedRequest.getRedirectUrl();

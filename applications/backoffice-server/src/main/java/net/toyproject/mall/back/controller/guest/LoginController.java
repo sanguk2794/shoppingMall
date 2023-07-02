@@ -34,7 +34,7 @@ public class LoginController extends BaseController {
                             HttpServletRequest req, Model model) {
 
         if (loginUser != null) {
-            return UrlBasedViewResolver.REDIRECT_URL_PREFIX + ConstUtils.DEFAULT_REDIRECT_URL;
+            return UrlBasedViewResolver.REDIRECT_URL_PREFIX + ConstUtils.DASHBOARD_URL;
         }
 
         if (!Objects.isNull(errorCode)) {

@@ -6,13 +6,14 @@ package net.toyproject.mall.back.controller.common;
 
 import net.toyproject.mall.back.controller.common.model.DashBoard;
 import net.toyproject.mall.back.controller.common.model.Paging;
+import net.toyproject.mall.back.util.ConstUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Objects;
 
 @Controller
-@RequestMapping("/dashboard")
+@RequestMapping(ConstUtils.DASHBOARD_URL)
 public class DashBoardController extends BaseController {
 
     protected DashBoard getDashboard(String name, String detail) {

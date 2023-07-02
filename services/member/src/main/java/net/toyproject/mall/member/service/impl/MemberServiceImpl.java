@@ -45,9 +45,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Integer getMembersCount() {
-        QMember qMember = QMember.member;
-
-        return factory.selectFrom(qMember).fetch().size();
+        return factory.selectFrom(QMember.member).fetch().size();
     }
 
     @Override
