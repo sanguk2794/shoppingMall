@@ -17,6 +17,6 @@ public interface CoService {
 
     Co updateCo(Co co);
 
-    long deleteCo(Long coSn);
+    void deleteCo(Long coSn);
 
 }
