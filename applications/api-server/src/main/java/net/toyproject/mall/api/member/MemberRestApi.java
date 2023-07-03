@@ -13,8 +13,8 @@ import net.toyproject.mall.api.member.dto.MembersDTO;
 import net.toyproject.mall.api.member.dto.RegisterMemberDTO;
 import net.toyproject.mall.api.member.dto.ResetPasswordDTO;
 import net.toyproject.mall.api.member.dto.UpdateMemberDTO;
-import net.toyproject.mall.api.util.MemberUtils;
-import net.toyproject.mall.api.util.MemberValidateUtils;
+import net.toyproject.mall.api.member.util.MemberUtils;
+import net.toyproject.mall.api.member.util.MemberValidateUtils;
 import net.toyproject.mall.common.code.OrderBy;
 import net.toyproject.mall.member.model.Member;
 import net.toyproject.mall.member.service.MemberService;
@@ -24,7 +24,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Objects;
 
 @RestController

@@ -2,7 +2,7 @@
  * @author sanguk on 2023/06/04
  */
 
-package net.toyproject.mall.api.util;
+package net.toyproject.mall.api.member.util;
 
 import net.toyproject.mall.api.member.dto.RegisterMemberDTO;
 import net.toyproject.mall.api.member.dto.UpdateMemberDTO;

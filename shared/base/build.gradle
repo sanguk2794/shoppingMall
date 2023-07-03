@@ -4,6 +4,9 @@
 
 dependencies {
     api project(':shared:base-api')
+
+    // test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 // Temporary skip tests. Because, This Project Tests dose not work.

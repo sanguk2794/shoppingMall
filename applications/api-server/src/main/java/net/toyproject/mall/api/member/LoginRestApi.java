@@ -11,7 +11,7 @@ import net.toyproject.mall.api.config.provider.JwtTokenProvider;
 import net.toyproject.mall.api.member.dto.LoginParam;
 import net.toyproject.mall.api.member.dto.RefreshTokenParam;
 import net.toyproject.mall.api.member.dto.TokenDTO;
-import net.toyproject.mall.api.util.MemberValidateUtils;
+import net.toyproject.mall.api.member.util.MemberValidateUtils;
 import net.toyproject.mall.common.code.LoginProcessStatusCode;
 import net.toyproject.mall.member.model.Member;
 import net.toyproject.mall.member.service.MemberService;
